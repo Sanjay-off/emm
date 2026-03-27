@@ -17,8 +17,9 @@ const FROM = `"${process.env.MAIL_FROM_NAME || 'App'}" <${process.env.GMAIL_USER
  * @param {string} to         - Recipient email address
  * @param {string} reset_link - The password reset URL
  * @param {string} expires_in - String indicating expiration time (e.g. "30 minutes")
+ * @param {string} name       - Recipient name for personalization
  */
-async function sendResetPasswordEmail(to, reset_link, expires_in = '30 minutes') {
+async function sendResetPasswordEmail(to, reset_link, expires_in = '30 minutes', name = 'User') {
   const html = `
     <!DOCTYPE html>
     <html lang="en">
@@ -47,7 +48,7 @@ async function sendResetPasswordEmail(to, reset_link, expires_in = '30 minutes')
           <h1>Secure Account Access</h1>
         </div>
         <div class="content">
-          <p>Hello,</p>
+          <p>Hello ${name},</p>
           <p>We received a request to reset the password for your account. If you made this request, simply click the button below to choose a new password.</p>
           
           <div class="btn-container">

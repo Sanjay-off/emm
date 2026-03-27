@@ -77,6 +77,7 @@ Sends a professionally designed password reset email with a security header imag
 {
   "email": "user@example.com",
   "reset_link": "https://myapp.com/reset?token=123",
+  "name": "Sanjay",             // Optional: Personalized name
   "expires_in": "45 minutes" // Optional: Customizable expiration text
 }
 ```

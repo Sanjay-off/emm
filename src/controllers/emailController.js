@@ -7,11 +7,12 @@ const { sendResetPasswordEmail, sendAnnouncementEmail } = require('../services/e
  *   {
  *     "email":      "user@example.com",   // recipient
  *     "reset_link": "https://...",        // password reset URL
- *     "expires_in": "1 hour"              // expiration text mapping to template
+ *     "expires_in": "1 hour",             // expiration text mapping to template
+ *     "name":       "Sanjay"              // recipient name for personalization
  *   }
  */
 async function handleResetPassword(req, res) {
-  const { email, reset_link, expires_in } = req.body;
+  const { email, reset_link, expires_in, name } = req.body;
 
   // ── Validate ────────────────────────────────────────────
   const missing = [];
@@ -31,7 +32,7 @@ async function handleResetPassword(req, res) {
   }
 
   try {
-    await sendResetPasswordEmail(email, reset_link, expires_in || '30 minutes');
+    await sendResetPasswordEmail(email, reset_link, expires_in || '30 minutes', name || 'User');
     return res.status(200).json({
       success: true,
       message: `Password reset email sent to ${email}.`,
